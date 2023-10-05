@@ -24,3 +24,15 @@ export const fetchProducts = async () => {
   });
   return response.data.results;
 };
+
+export const fetchProductDetail = async (id) => {
+  const accessToken = await getAccessToken();
+  console.log('Id: ', id);
+  const response = await axios.get(`${apiUrl}/${projectKey}/product-projections/${id}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  console.log('data: ', response.data);
+  return response.data;
+};

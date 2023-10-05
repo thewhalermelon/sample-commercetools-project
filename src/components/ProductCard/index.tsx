@@ -214,14 +214,34 @@ const ProductCard: React.FC<Props> = ({ id, image, title, location, item }) => {
               >
                 <StyledType>Type of Product</StyledType>
                 <StyledLabel>PRICE </StyledLabel>
-                <StyledValue>
+                {/* <StyledValue>
                   {item.masterVariant.prices ? item.masterVariant?.prices[0]?.value.centAmount : 'none'}{' '}
                   {item.masterVariant.prices ? item.masterVariant?.prices[0]?.value.currencyCode : 'none'}
-                </StyledValue>
-                <StyledValue>
-                  {item.masterVariant.prices ? item.masterVariant?.prices[1]?.value.centAmount : 'none'}{' '}
-                  {item.masterVariant.prices ? item.masterVariant?.prices[1]?.value.currencyCode : 'none'}
-                </StyledValue>
+                </StyledValue> */}
+
+                {!item.masterVariant.prices[0].discounted ? (
+                  <StyledValue>
+                    {item.masterVariant.prices ? item.masterVariant?.prices[0]?.value.centAmount : 'none'}{' '}
+                    {item.masterVariant.prices ? item.masterVariant?.prices[0]?.value.currencyCode : 'none'}
+                  </StyledValue>
+                ) : (
+                  <StyledValue style={{ textDecoration: 'line-through' }}>
+                    {item.masterVariant.prices ? item.masterVariant?.prices[0]?.value.centAmount : 'none'}{' '}
+                    {item.masterVariant.prices ? item.masterVariant?.prices[0]?.value.currencyCode : 'none'}
+                  </StyledValue>
+                )}
+
+                {item.masterVariant.prices[0]?.discounted ? (
+                  <>
+                    <StyledLabel>PriceDiscounted</StyledLabel>
+                    <StyledValue>
+                      {item.masterVariant.prices[0].discounted.value.centAmount}{' '}
+                      {item.masterVariant.prices[0].discounted.value.currencyCode}
+                    </StyledValue>
+                  </>
+                ) : (
+                  ''
+                )}
               </Box>
             </Grid>
             <Grid item xs={6}>

@@ -100,6 +100,7 @@ const StyledValue = styled(Box)(({ theme }: any) => ({
   color: theme.colors.value3,
   fontFamily: theme.fonts.poppinsMedium,
   fontSize: '20px',
+  textDecoration: 'lineThrough',
 }));
 
 const CardDetail = () => {
@@ -136,6 +137,7 @@ const CardDetail = () => {
             }}
           ></Box>
         </StyledLeft>
+
         <StyledRight>
           <StyledTitle>{productDetail.name['en-US']}</StyledTitle>
           <StyledCategory>Category: {productDetail.key}</StyledCategory>
@@ -156,14 +158,29 @@ const CardDetail = () => {
             </div>
           </StyledAttributes>
           <StyledDescription>Price: </StyledDescription>
-          <StyledValue>
-            {productDetail.masterVariant.prices ? productDetail.masterVariant?.prices[0]?.value.centAmount : 'none'}{' '}
-            {productDetail.masterVariant.prices ? productDetail.masterVariant?.prices[0]?.value.currencyCode : 'none'}
-          </StyledValue>
-          <StyledValue>
-            {productDetail.masterVariant.prices ? productDetail.masterVariant?.prices[1]?.value.centAmount : 'none'}{' '}
-            {productDetail.masterVariant.prices ? productDetail.masterVariant?.prices[1]?.value.currencyCode : 'none'}
-          </StyledValue>
+          {!productDetail.masterVariant.prices[0].discounted ? (
+            <StyledValue>
+              {productDetail.masterVariant.prices ? productDetail.masterVariant?.prices[0]?.value.centAmount : 'none'}{' '}
+              {productDetail.masterVariant.prices ? productDetail.masterVariant?.prices[0]?.value.currencyCode : 'none'}
+            </StyledValue>
+          ) : (
+            <StyledValue style={{ textDecoration: 'line-through' }}>
+              {productDetail.masterVariant.prices ? productDetail.masterVariant?.prices[0]?.value.centAmount : 'none'}{' '}
+              {productDetail.masterVariant.prices ? productDetail.masterVariant?.prices[0]?.value.currencyCode : 'none'}
+            </StyledValue>
+          )}
+
+          {productDetail.masterVariant.prices[0].discounted ? (
+            <>
+              <StyledDescription>PriceDiscounted</StyledDescription>
+              <StyledValue>
+                {productDetail.masterVariant.prices[0].discounted.value.centAmount}{' '}
+                {productDetail.masterVariant.prices[0].discounted.value.currencyCode}
+              </StyledValue>
+            </>
+          ) : (
+            ''
+          )}
 
           <div style={{ marginTop: '30px' }}>
             <StyledLabel htmlFor='quantity'>Quantity:</StyledLabel>

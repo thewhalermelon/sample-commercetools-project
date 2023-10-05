@@ -195,12 +195,24 @@ const ProductCard: React.FC<Props> = ({ id, image, title, location, item }) => {
             <StyledTitle>{title}</StyledTitle>
 
             <StyledFav>
-              <img width='18' height='18' alt='' src='/icons/star-fill.svg' loading='lazy' />
+              <img
+                width='18'
+                height='18'
+                alt=''
+                src='/sample-commercetools-project/icons/star-fill.svg'
+                loading='lazy'
+              />
               <StyledFavText>4.91</StyledFavText>
             </StyledFav>
           </StyledHead>
           <StyledSub>
-            <img width='18' height='18' alt='' src='/icons/mdi_location.svg' loading='lazy' />
+            <img
+              width='18'
+              height='18'
+              alt=''
+              src='/sample-commercetools-project/icons/mdi_location.svg'
+              loading='lazy'
+            />
 
             <StyledTextSub>{location}</StyledTextSub>
           </StyledSub>
